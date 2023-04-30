@@ -5,13 +5,17 @@
       :items="listData"
       :options.sync="options"
       :server-items-length="total"
+      :footer-props="{
+        showFirstLastPage: true,
+      }"
       class="elevation-2"
     >
-      <!-- <template v-slot:item.calories="{ item }">
-        <v-chip :color="getColor(item.calories)" dark>
-          {{ item.calories }}
-        </v-chip>
-      </template> -->
+      <template v-slot:item.Status="{ item }">
+        <v-btn v-if="item.Status === 1" rounded color="green" x-small dark>
+          Active
+        </v-btn>
+        <v-btn v-else rounded color="red" x-small dark> Inactive </v-btn>
+      </template>
     </v-data-table>
   </div>
 </template>
@@ -19,11 +23,11 @@
 export default {
   data() {
     return {
-      total: 5,
+      total: 20,
       listData: [
         {
           UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "cristiano",
+          UserName: "cris07",
           FullName: "Cristiano Ronaldo",
           Email: "cris07@gmail.com",
           Status: 1,
@@ -31,34 +35,34 @@ export default {
         },
         {
           UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "cristiano",
-          FullName: "Cristiano Ronaldo",
-          Email: "cris07@gmail.com",
+          UserName: "leo10",
+          FullName: " Leo Messi",
+          Email: "leo10@gmail.com",
+          Status: 2,
+          RoleType: 1,
+        },
+        {
+          UserID: Math.floor(Math.random() * 10000) + 1,
+          UserName: "robert09",
+          FullName: "Robert Lewandosky",
+          Email: "robert09@gmail.com",
           Status: 1,
           RoleType: 1,
         },
         {
           UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "cristiano",
-          FullName: "Cristiano Ronaldo",
-          Email: "cris07@gmail.com",
+          UserName: "km10",
+          FullName: "Kilian Mpape",
+          Email: "km10@gmail.com",
           Status: 1,
           RoleType: 1,
         },
         {
           UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "cristiano",
-          FullName: "Cristiano Ronaldo",
-          Email: "cris07@gmail.com",
-          Status: 1,
-          RoleType: 1,
-        },
-        {
-          UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "cristiano",
-          FullName: "Cristiano Ronaldo",
-          Email: "cris07@gmail.com",
-          Status: 1,
+          UserName: "neymar",
+          FullName: "Neymar Jr",
+          Email: "neymarjr@gmail.com",
+          Status: 2,
           RoleType: 1,
         },
       ],
@@ -83,7 +87,13 @@ export default {
   watch: {
     options: {
       handler() {
-        console.log(this.options);
+        let tableParams = {};
+        tableParams.pageSize = this.options.itemsPerPage;
+        tableParams.pageIndex = this.options.page;
+        tableParams.sortBy = this.options.sortBy[0];
+        tableParams.sortDesc = this.options.sortDesc[0];
+
+        this.$emit('change-table-options', tableParams)
       },
       deep: true,
     },
