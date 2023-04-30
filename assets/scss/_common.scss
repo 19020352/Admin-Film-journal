@@ -1,0 +1,355 @@
+
+.bg-dark {
+    background-color: var(--bg-dark);
+}
+
+.text-primary-500 {
+    color: var(--primary-500) !important;
+}
+
+.text-primary-200 {
+    color: var(--primary-200) !important;
+}
+
+.text-500 {
+    color: var(--text-500) !important;
+}
+
+.text-400 {
+    color: var(--text-400) !important;
+}
+
+.text-300 {
+    color: var(--text-300) !important;
+}
+
+.text-200 {
+    color: var(--text-200) !important;
+}
+
+.text-100 {
+    color: var(--text-100) !important;
+}
+
+.text-0 {
+    color: var(--text-0) !important;
+}
+
+
+
+@for $i from 1 through 100 {
+    // Width (%)
+    .wp-#{$i} {
+        width: $i * 1%;
+
+        &_i {
+            width: $i * 1% !important;
+        }
+    }
+
+    // Height (%)
+    .hp-#{$i} {
+        height: $i * 1%;
+
+        &_i {
+            height: $i * 1% !important;
+        }
+    }
+
+    // Width 
+    .w-#{$i} {
+        width: $i * 4 + px;
+
+        &_i {
+            width: $i * 4 + px !important;
+        }
+    }
+
+    // Height
+    .h-#{$i} {
+        height: $i * 4 + px;
+
+        &_i {
+            height: $i * 4 + px !important;
+        }
+    }
+
+    // Min width
+    .min-w-#{$i} {
+        min-width: $i * 5 + px;
+
+        &_i {
+            min-width: $i * 5 + px !important;
+        }
+    }
+
+    // Max-width
+    .max-w-#{$i} {
+        min-width: $i * 5 + px;
+
+        &_i {
+            min-width: $i * 5 + px !important;
+        }
+    }
+
+    // Font-size
+    .f-#{$i} {
+        font-size: $i + px;
+
+        &_i {
+            font-size: $i + px !important;
+        }
+    }
+
+}
+
+@for $i from 3 through 10 {
+
+    // Font-weight
+    .fw-#{$i} {
+        font-weight: $i * 100 !important;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    @for $i from 1 through 100 {
+        .wp-sm-#{$i} {
+            width: $i * 1%;
+    
+            &_i {
+                width: $i * 1% !important;
+            }
+        }
+    
+        .hp-sm-#{$i} {
+            height: $i * 1%;
+    
+            &_i {
+                height: $i * 1% !important;
+            }
+        }
+    
+        .w-sm-#{$i} {
+            width: $i * 4 + px;
+    
+            &_i {
+                width: $i * 4 + px !important;
+            }
+        }
+    
+        .h-sm-#{$i} {
+            height: $i * 4 + px;
+    
+            &_i {
+                height: $i * 4 + px !important;
+            }
+        }
+    
+        .f-sm-#{$i} {
+            font-size: $i + px;
+    
+            &_i {
+                font-size: $i + px !important;
+            }
+        }
+    
+        .min-w-sm-#{$i} {
+            min-width: $i * 5 + px;
+    
+            &_i {
+                min-width: $i * 5 + px !important;
+            }
+        }
+    
+        .max-w-sm-#{$i} {
+            min-width: $i * 5 + px;
+    
+            &_i {
+                min-width: $i * 5 + px !important;
+            }
+        }
+    }
+}
+@media screen and (min-width: 960px) {
+    @for $i from 1 through 100 {
+        .wp-md-#{$i} {
+            width: $i * 1%;
+    
+            &_i {
+                width: $i * 1% !important;
+            }
+        }
+    
+        .hp-md-#{$i} {
+            height: $i * 1%;
+    
+            &_i {
+                height: $i * 1% !important;
+            }
+        }
+    
+        .w-md-#{$i} {
+            width: $i * 4 + px;
+    
+            &_i {
+                width: $i * 4 + px !important;
+            }
+        }
+    
+        .h-md-#{$i} {
+            height: $i * 4 + px;
+    
+            &_i {
+                height: $i * 4 + px !important;
+            }
+        }
+    
+        .f-md-#{$i} {
+            font-size: $i + px;
+    
+            &_i {
+                font-size: $i + px !important;
+            }
+        }
+    
+        .min-w-md-#{$i} {
+            min-width: $i * 5 + px;
+    
+            &_i {
+                min-width: $i * 5 + px !important;
+            }
+        }
+    
+        .max-w-md-#{$i} {
+            min-width: $i * 5 + px;
+    
+            &_i {
+                min-width: $i * 5 + px !important;
+            }
+        }
+    }
+    
+}
+@media screen and (min-width: 1280px) {
+    @for $i from 1 through 100 {
+        .wp-lg-#{$i} {
+            width: $i * 1%;
+    
+            &_i {
+                width: $i * 1% !important;
+            }
+        }
+    
+        .hp-lg-#{$i} {
+            height: $i * 1%;
+    
+            &_i {
+                height: $i * 1% !important;
+            }
+        }
+    
+        .w-lg-#{$i} {
+            width: $i * 4 + px;
+    
+            &_i {
+                width: $i * 4 + px !important;
+            }
+        }
+    
+        .h-lg-#{$i} {
+            height: $i * 4 + px;
+    
+            &_i {
+                height: $i * 4 + px !important;
+            }
+        }
+    
+        .f-lg-#{$i} {
+            font-size: $i + px;
+    
+            &_i {
+                font-size: $i + px !important;
+            }
+        }
+    
+        .min-w-lg-#{$i} {
+            min-width: $i * 5 + px;
+    
+            &_i {
+                min-width: $i * 5 + px !important;
+            }
+        }
+    
+        .max-w-lg-#{$i} {
+            min-width: $i * 5 + px;
+    
+            &_i {
+                min-width: $i * 5 + px !important;
+            }
+        }
+    }
+    
+}
+@media screen and (min-width: 1600px) {
+    
+    @for $i from 1 through 100 {
+        .wp-xl-#{$i} {
+            width: $i * 1%;
+    
+            &_i {
+                width: $i * 1% !important;
+            }
+        }
+    
+        .hp-xl-#{$i} {
+            height: $i * 1%;
+    
+            &_i {
+                height: $i * 1% !important;
+            }
+        }
+    
+        .w-xl-#{$i} {
+            width: $i * 4 + px;
+    
+            &_i {
+                width: $i * 4 + px !important;
+            }
+        }
+    
+        .h-xl-#{$i} {
+            height: $i * 4 + px;
+    
+            &_i {
+                height: $i * 4 + px !important;
+            }
+        }
+    
+        .f-xl-#{$i} {
+            font-size: $i + px;
+    
+            &_i {
+                font-size: $i + px !important;
+            }
+        }
+    
+        .min-w-xl-#{$i} {
+            min-width: $i * 5 + px;
+    
+            &_i {
+                min-width: $i * 5 + px !important;
+            }
+        }
+    
+        .max-w-xl-#{$i} {
+            min-width: $i * 5 + px;
+    
+            &_i {
+                min-width: $i * 5 + px !important;
+            }
+        }
+    }
+}
+@media screen and (min-width: 2560px) {
+    
+}
