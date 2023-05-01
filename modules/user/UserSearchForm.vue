@@ -1,6 +1,6 @@
 <template>
-  <div class="pa-4 elevation-2 rounded-lg">
-    <div class="d-flex align-center">
+  <div class="pa-4 elevation-2 rounded-lg mb-4">
+    <div class="d-flex align-center my-1">
       <v-btn icon @click="expanded = !expanded">
         <v-icon v-if="expanded">mdi-chevron-down</v-icon>
         <v-icon v-else>mdi-chevron-right</v-icon>
@@ -56,10 +56,10 @@
           </v-row>
 
           <div class="mt-2">
-            <v-btn type="reset" class="mr-2 text-0" color="#DD2E16"
+            <v-btn type="reset" class="mr-2 text-0" color="error" outlined
               >Clear</v-btn
             >
-            <v-btn @click="handleSubmit" class="text-0" color="#51b7f7">
+            <v-btn @click="handleSubmit" class="text-0" color="primary">
               Search
             </v-btn>
           </div>

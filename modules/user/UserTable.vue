@@ -1,5 +1,5 @@
 <template>
-  <div class="my-4">
+  <div class="my-2">
     <v-data-table
       :headers="listHeadData"
       :items="listData"
@@ -16,6 +16,38 @@
         </v-btn>
         <v-btn v-else rounded color="red" x-small dark> Inactive </v-btn>
       </template>
+      
+      <template v-slot:item.RoleType="{ item }">
+        <div class="text-primary-500" v-if="item.RoleType === 2 ">Admin</div>
+        <div class="text-primary-500" v-else-if="item.RoleType === 3 ">Super Admin</div>
+        <div v-else>User</div>
+      </template>
+      <template v-slot:item.Action="{ item }">
+        <v-menu offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              icon
+              color="black"
+              v-bind="attrs"
+              v-on="on"
+            >
+              <v-icon> mdi-google-drive </v-icon>
+            </v-btn>
+          </template>
+          <v-list dense>
+            <v-list-item link>
+              <v-list-item-content>
+                <v-list-item-title>Edit</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item color="purple" link>
+              <v-list-item-content>
+                <v-list-item-title color="purple">Delete</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </template>
     </v-data-table>
   </div>
 </template>
@@ -24,48 +56,6 @@ export default {
   data() {
     return {
       total: 20,
-      listData: [
-        {
-          UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "cris07",
-          FullName: "Cristiano Ronaldo",
-          Email: "cris07@gmail.com",
-          Status: 1,
-          RoleType: 1,
-        },
-        {
-          UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "leo10",
-          FullName: " Leo Messi",
-          Email: "leo10@gmail.com",
-          Status: 2,
-          RoleType: 1,
-        },
-        {
-          UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "robert09",
-          FullName: "Robert Lewandosky",
-          Email: "robert09@gmail.com",
-          Status: 1,
-          RoleType: 1,
-        },
-        {
-          UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "km10",
-          FullName: "Kilian Mpape",
-          Email: "km10@gmail.com",
-          Status: 1,
-          RoleType: 1,
-        },
-        {
-          UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "neymar",
-          FullName: "Neymar Jr",
-          Email: "neymarjr@gmail.com",
-          Status: 2,
-          RoleType: 1,
-        },
-      ],
       listHeadData: [
         { value: "UserID", text: "User ID" },
         { value: "UserName", text: "User name" },
@@ -78,11 +68,24 @@ export default {
           align: "center",
           sortable: false,
         },
-        { value: "action", text: "Action", align: "center", sortable: false },
+        { value: "Action", text: "Action", align: "center", sortable: false },
       ],
       options: {},
+      items: [
+        {
+          icon: "mdi-apps",
+          title: "Dashboard",
+          to: "/",
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "User",
+          to: "/user",
+        },
+      ],
     };
   },
+  props: ["listData"],
 
   watch: {
     options: {
@@ -93,7 +96,7 @@ export default {
         tableParams.sortBy = this.options.sortBy[0];
         tableParams.sortDesc = this.options.sortDesc[0];
 
-        this.$emit('change-table-options', tableParams)
+        this.$emit("change-table-options", tableParams);
       },
       deep: true,
     },
