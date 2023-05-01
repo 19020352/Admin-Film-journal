@@ -8,6 +8,10 @@
       :footer-props="{
         showFirstLastPage: true,
       }"
+      :loading="isLoading"
+      fixed-header
+      no-data-text="No data founded"
+      height="400px"
       class="elevation-2"
     >
       <template v-slot:item.Status="{ item }">
@@ -16,35 +20,32 @@
         </v-btn>
         <v-btn v-else rounded color="red" x-small dark> Inactive </v-btn>
       </template>
-      
+
       <template v-slot:item.RoleType="{ item }">
-        <div class="text-primary-500" v-if="item.RoleType === 2 ">Admin</div>
-        <div class="text-primary-500" v-else-if="item.RoleType === 3 ">Super Admin</div>
+        <div class="text-primary-500" v-if="item.RoleType === 2">Admin</div>
+        <div class="text-primary-500" v-else-if="item.RoleType === 3">
+          Super Admin
+        </div>
         <div v-else>User</div>
       </template>
       <template v-slot:item.Action="{ item }">
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              icon
-              color="black"
-              v-bind="attrs"
-              v-on="on"
-            >
+            <v-btn icon color="black" v-bind="attrs" v-on="on">
               <v-icon> mdi-google-drive </v-icon>
             </v-btn>
           </template>
-          <v-list dense>
-            <v-list-item link>
+          <v-list color="#e4e9f0" dense>
+            <v-list-item link @click="handleOnEdit(item.UserID)">
               <v-list-item-content>
                 <v-list-item-title>Edit</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item color="purple" link>
+            <!-- <v-list-item link>
               <v-list-item-content>
-                <v-list-item-title color="purple">Delete</v-list-item-title>
+                <v-list-item-title>Delete</v-list-item-title>
               </v-list-item-content>
-            </v-list-item>
+            </v-list-item> -->
           </v-list>
         </v-menu>
       </template>
@@ -85,7 +86,7 @@ export default {
       ],
     };
   },
-  props: ["listData"],
+  props: ["listData", "isLoading"],
 
   watch: {
     options: {
@@ -99,6 +100,11 @@ export default {
         this.$emit("change-table-options", tableParams);
       },
       deep: true,
+    },
+  },
+  methods: {
+    handleOnEdit(id) {
+      this.$emit("on-edit", id);
     },
   },
 };

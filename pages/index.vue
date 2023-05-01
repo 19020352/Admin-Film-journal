@@ -70,7 +70,6 @@
           >
             Continue
           </v-btn>
-          <div style="color: var(--primary-500)">bb</div>
         </v-card-actions>
       </v-card>
     </v-col>

@@ -8,7 +8,8 @@
             label="User id"
             variant="outlined"
             clearable
-            filled
+            dense
+            outlined
             prepend-inner-icon="mdi-rename-box"
           ></v-text-field>
         </v-col>
@@ -17,7 +18,8 @@
             v-model="form.UserName"
             label="User name"
             clearable
-            filled
+            dense
+            outlined
             prepend-inner-icon="mdi-feather"
           ></v-text-field>
         </v-col>
@@ -26,7 +28,8 @@
             v-model="form.FullName"
             label="Full name"
             clearable
-            filled
+            dense
+            outlined
             prepend-inner-icon="mdi-feather"
           ></v-text-field>
         </v-col>
@@ -35,20 +38,20 @@
             v-model="form.Email"
             label="Email"
             clearable
-            filled
+            dense
+            outlined
             prepend-inner-icon="mdi-feather"
           ></v-text-field>
         </v-col>
-      </v-row>
-      <v-row>
         <v-col cols="12" sm="6" md="4">
           <v-select
             v-model="form.Status"
-            :items="statusType"
+            :items="statusTypeList"
             item-text="label"
             item-value="value"
             clearable
-            filled
+            dense
+            outlined
             label="Status"
             prepend-inner-icon="mdi-google-nearby"
           ></v-select>
@@ -60,14 +63,25 @@
             item-text="label"
             item-value="value"
             clearable
-            filled
+            dense
+            outlined
             label="Role Type"
             prepend-inner-icon="mdi-map"
           ></v-select>
         </v-col>
+
+        <v-overlay z-index="1" :value="isLoading" :absolute="true">
+          <v-progress-circular
+            indeterminate
+            color="primary"
+          ></v-progress-circular>
+        </v-overlay>
       </v-row>
 
-      <div class="mt-2 d-flex align-center justify-end">
+      <div
+        class="mt-2 d-flex align-center justify-end"
+        style="z-index: 2; position: relative"
+      >
         <v-btn @click="handleCancel" class="mr-2 text-0" color="error"
           >Cancel</v-btn
         >
@@ -82,42 +96,68 @@
   </div>
 </template>
 <script>
+import { STATUS_TYPE_LIST, ROLE_TYPE_LIST } from "./js/common";
+import apiClient from "~/services/apiClient";
+
 export default {
   data() {
     return {
-      dataUserDetail: {
+      dataResponse: {},
+      form: {},
+      isLoading: false,
+    };
+  },
+  props: ["id"],
+  computed: {
+    statusTypeList() {
+      return STATUS_TYPE_LIST;
+    },
+    roleTypeList() {
+      return ROLE_TYPE_LIST;
+    },
+  },
+  async created() {
+    if (this.id) {
+      await this.getDetail();
+    }
+  },
+  watch: {
+    id: {
+      handler() {
+        if (this.id) {
+          this.getDetail();
+        }
+      },
+    },
+  },
+  methods: {
+    async getDetail() {
+      console.log("get data");
+      try {
+        this.isLoading = true;
+        const res = apiClient.getDetail(this.id);
+        this.isLoading = false;
+      } catch (error) {}
+      this.dataResponse = {
         UserID: Math.floor(Math.random() * 10000) + 1,
         UserName: "cris07",
         FullName: "Cristiano Ronaldo",
         Email: "cris07@gmail.com",
         Status: 2,
-        RoleType: 1,    
-      },
-      form: {},
-      statusType: [
-        {value: 1, label: 'Active'},
-        {value: 2, label: 'Inactive'},
-      ],
-      roleTypeList: [
-        {value: 1, label: 'User'},
-        {value: 2, label: 'Admin'},
-        {value: 2, label: 'Super Admin'},
-      ]
-    };
-  },
-  mounted() {
-    this.form = { ...this.dataUserDetail };
-  },
-  methods: {
+        RoleType: 1,
+      };
+
+      this.form = { ...this.dataResponse };
+    },
     handleCancel() {
-      this.$emit('cancel')
+      this.$emit("cancel");
     },
     handleReset() {
-      this.form = { ...this.dataUserDetail };
+      this.form = { ...this.dataResponse };
     },
     handleSubmit() {
-      this.$emit('submit-form', this.form)
-    }
+      this.$emit("submit-form", this.form);
+    },
   },
 };
 </script>

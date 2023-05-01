@@ -18,6 +18,7 @@
                 label="User name"
                 variant="outlined"
                 clearable
+                dense
                 filled
                 prepend-inner-icon="mdi-rename-box"
               ></v-text-field>
@@ -27,6 +28,7 @@
                 v-model="form.fullName"
                 label="Full name"
                 clearable
+                dense
                 filled
                 prepend-inner-icon="mdi-feather"
               ></v-text-field>
@@ -38,6 +40,7 @@
                 v-model="form.status"
                 :items="['Active', 'Inactive']"
                 clearable
+                dense
                 filled
                 label="Status"
                 prepend-inner-icon="mdi-google-nearby"
@@ -48,6 +51,7 @@
                 v-model="form.roleType"
                 :items="['User', 'Admin', 'Super Admin']"
                 clearable
+                dense
                 filled
                 label="Role Type"
                 prepend-inner-icon="mdi-map"
@@ -76,7 +80,6 @@ export default {
       form: {
         fullName: "",
         userName: "",
-        address: "",
         status: "",
         roleType: "",
       },
@@ -93,8 +96,7 @@ export default {
   methods: {
     handleSubmit() {
       if (this.$refs.formSearch.validate()) {
-        console.log("Validate: ", this.$refs.formSearch.validate());
-        console.log("formData: ", this.form);
+        this.$emit('change-search-options', this.form)
       } else return;
     },
   },
