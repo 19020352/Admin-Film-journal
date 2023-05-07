@@ -34,7 +34,7 @@
       <v-menu bottom min-width="200px" rounded offset-y>
         <template v-slot:activator="{ on }">
           <v-btn icon x-large v-on="on">
-            <v-avatar size="40">
+            <v-avatar size="32">
               <img :src="user.avatar" alt="user avatar" />
             </v-avatar>
           </v-btn>
@@ -66,6 +66,7 @@
       </v-container>
     </v-main>
     <v-footer :absolute="!fixed" app> </v-footer>
+    <notifications group="api" />
   </v-app>
 </template>
 
@@ -111,4 +112,6 @@ export default {
     background-color: var(--primary-500);
   }
 }
+
+.
 </style>

@@ -59,16 +59,24 @@ export default {
   methods: {
     handleSubmit() {
       if (this.$refs.formLogin.validate()) {
-
         // Call api login
 
-
-        this.$cookies.set("token", this.email);
-        this.$cookies.set("user", {
-          email: this.email,
-          avatar: 'https://picsum.photos/80',
-          userName: 'Cristiano'
+        this.$cookies.set("token", this.email, {
+          path: "/",
+          maxAge: 60 * 30,
         });
+        this.$cookies.set(
+          "user",
+          {
+            email: this.email,
+            avatar: "https://picsum.photos/80",
+            userName: "Cristiano",
+          },
+          {
+            path: "/",
+            maxAge: 60 * 30,
+          }
+        );
         this.$router.push("/");
       } else return;
     },
@@ -95,9 +103,6 @@ export default {
     url("https://images.pexels.com/photos/2883049/pexels-photo-2883049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
     center center/cover no-repeat;
   padding: 12px;
-
-  .form-login {
-  }
 }
 
 @media screen and (min-width: 960px) {

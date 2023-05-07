@@ -22,7 +22,7 @@ export default {
   css: ["@/assets/scss/index.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: "~/plugins/axios.js" }],
+  plugins: [{ src: "~/plugins/vue-notification.js", mode: "client" }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -37,8 +37,12 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
-    'cookie-universal-nuxt',
+    "cookie-universal-nuxt",
   ],
+
+  router: {
+    middleware: ["auth"],
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {

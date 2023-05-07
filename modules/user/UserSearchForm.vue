@@ -16,10 +16,9 @@
               <v-text-field
                 v-model="form.userName"
                 label="User name"
-                variant="outlined"
+                outlined
                 clearable
                 dense
-                filled
                 prepend-inner-icon="mdi-rename-box"
               ></v-text-field>
             </v-col>
@@ -27,9 +26,9 @@
               <v-text-field
                 v-model="form.fullName"
                 label="Full name"
+                outlined
                 clearable
                 dense
-                filled
                 prepend-inner-icon="mdi-feather"
               ></v-text-field>
             </v-col>
@@ -39,9 +38,9 @@
               <v-select
                 v-model="form.status"
                 :items="['Active', 'Inactive']"
+                outlined
                 clearable
                 dense
-                filled
                 label="Status"
                 prepend-inner-icon="mdi-google-nearby"
               ></v-select>
@@ -50,9 +49,9 @@
               <v-select
                 v-model="form.roleType"
                 :items="['User', 'Admin', 'Super Admin']"
+                outlined
                 clearable
                 dense
-                filled
                 label="Role Type"
                 prepend-inner-icon="mdi-map"
               ></v-select>

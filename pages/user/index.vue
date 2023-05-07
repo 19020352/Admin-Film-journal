@@ -61,93 +61,19 @@ export default {
     return {
       params: {},
       dialog: false,
-      listData: [
-        {
-          UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "cris07",
-          FullName: "Cristiano Ronaldo",
-          Email: "cris07@gmail.com",
-          Status: 1,
-          RoleType: 1,
-        },
-        {
-          UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "leo10",
-          FullName: " Leo Messi",
-          Email: "leo10@gmail.com",
-          Status: 2,
-          RoleType: 1,
-        },
-        {
-          UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "robert09",
-          FullName: "Robert Lewandosky",
-          Email: "robert09@gmail.com",
-          Status: 1,
-          RoleType: 1,
-        },
-        {
-          UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "km10",
-          FullName: "Kilian Mpape",
-          Email: "km10@gmail.com",
-          Status: 1,
-          RoleType: 1,
-        },
-        {
-          UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "neymar",
-          FullName: "Neymar Jr",
-          Email: "neymarjr@gmail.com",
-          Status: 2,
-          RoleType: 1,
-        },
-        {
-          UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "cris07",
-          FullName: "Cristiano Ronaldo",
-          Email: "cris07@gmail.com",
-          Status: 1,
-          RoleType: 1,
-        },
-        {
-          UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "leo10",
-          FullName: " Leo Messi",
-          Email: "leo10@gmail.com",
-          Status: 2,
-          RoleType: 1,
-        },
-        {
-          UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "robert09",
-          FullName: "Robert Lewandosky",
-          Email: "robert09@gmail.com",
-          Status: 1,
-          RoleType: 1,
-        },
-        {
-          UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "km10",
-          FullName: "Kilian Mpape",
-          Email: "km10@gmail.com",
-          Status: 1,
-          RoleType: 1,
-        },
-        {
-          UserID: Math.floor(Math.random() * 10000) + 1,
-          UserName: "neymar",
-          FullName: "Neymar Jr",
-          Email: "neymarjr@gmail.com",
-          Status: 2,
-          RoleType: 1,
-        },
-      ],
+      listData: [],
       isLoading: false,
       itemId: "",
     };
   },
   components: { UserSearchForm, UserTable, UserCreateEditForm },
+  mounted() {
+    this.$notify({
+      group: "auth",
+      text: "Wrong password, please try again later",
+    });
+  },
+
   async created() {
     await this.getListItem();
   },
@@ -156,8 +82,92 @@ export default {
       try {
         this.isLoading = true;
         const res = await apiClient.getUsers();
-        this.isLoading = false;
-        console.log(res);
+        setTimeout(() => {
+          this.isLoading = false;
+          this.listData = [
+            {
+              UserID: Math.floor(Math.random() * 10000) + 1,
+              UserName: "cris07",
+              FullName: "Cristiano Ronaldo",
+              Email: "cris07@gmail.com",
+              Status: 1,
+              RoleType: 1,
+            },
+            {
+              UserID: Math.floor(Math.random() * 10000) + 1,
+              UserName: "leo10",
+              FullName: " Leo Messi",
+              Email: "leo10@gmail.com",
+              Status: 2,
+              RoleType: 1,
+            },
+            {
+              UserID: Math.floor(Math.random() * 10000) + 1,
+              UserName: "robert09",
+              FullName: "Robert Lewandosky",
+              Email: "robert09@gmail.com",
+              Status: 1,
+              RoleType: 1,
+            },
+            {
+              UserID: Math.floor(Math.random() * 10000) + 1,
+              UserName: "km10",
+              FullName: "Kilian Mpape",
+              Email: "km10@gmail.com",
+              Status: 1,
+              RoleType: 1,
+            },
+            {
+              UserID: Math.floor(Math.random() * 10000) + 1,
+              UserName: "neymar",
+              FullName: "Neymar Jr",
+              Email: "neymarjr@gmail.com",
+              Status: 2,
+              RoleType: 1,
+            },
+            {
+              UserID: Math.floor(Math.random() * 10000) + 1,
+              UserName: "cris07",
+              FullName: "Cristiano Ronaldo",
+              Email: "cris07@gmail.com",
+              Status: 1,
+              RoleType: 1,
+            },
+            {
+              UserID: Math.floor(Math.random() * 10000) + 1,
+              UserName: "leo10",
+              FullName: " Leo Messi",
+              Email: "leo10@gmail.com",
+              Status: 2,
+              RoleType: 1,
+            },
+            {
+              UserID: Math.floor(Math.random() * 10000) + 1,
+              UserName: "robert09",
+              FullName: "Robert Lewandosky",
+              Email: "robert09@gmail.com",
+              Status: 1,
+              RoleType: 1,
+            },
+            {
+              UserID: Math.floor(Math.random() * 10000) + 1,
+              UserName: "km10",
+              FullName: "Kilian Mpape",
+              Email: "km10@gmail.com",
+              Status: 1,
+              RoleType: 1,
+            },
+            {
+              UserID: Math.floor(Math.random() * 10000) + 1,
+              UserName: "neymar",
+              FullName: "Neymar Jr",
+              Email: "neymarjr@gmail.com",
+              Status: 2,
+              RoleType: 1,
+            },
+          ];
+        }, 500);
+        // console.log(res);
       } catch (e) {
         console.log(e);
       }
@@ -171,7 +181,7 @@ export default {
       console.log("Change table params", this.params);
 
       // call api query search
-      await this.getListItem()
+      await this.getListItem();
     },
 
     async handleChangeSearchOptions(searchParams) {
@@ -182,7 +192,7 @@ export default {
       console.log("Change search params", this.params);
 
       // call api query search
-      await this.getListItem()
+      await this.getListItem();
     },
 
     async handleSubmitForm(form) {
