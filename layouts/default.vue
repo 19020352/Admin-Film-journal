@@ -35,7 +35,7 @@
         <template v-slot:activator="{ on }">
           <v-btn icon x-large v-on="on">
             <v-avatar size="32">
-              <img :src="user.avatar" alt="user avatar" />
+              <img :src="user?.Avatar || 'https://picsum.photos/80'" alt="user avatar" />
             </v-avatar>
           </v-btn>
         </template>
@@ -43,11 +43,11 @@
           <v-list-item-content class="justify-center">
             <div class="mx-auto text-center">
               <v-avatar size="40">
-                <img :src="user.avatar" alt="user-avatar" />
+                <img :src="user?.Avatar || 'https://picsum.photos/80'" alt="user-avatar" />
               </v-avatar>
-              <h3 class="mt-2">{{ user.userName }}</h3>
+              <h3 class="mt-2">{{ user?.UserName || '' }}</h3>
               <p class="text-caption mt-1">
-                {{ user.email }}
+                {{ user?.Email || '' }}
               </p>
               <v-divider class="my-1"></v-divider>
               <v-btn depressed rounded text> Edit Account </v-btn>
