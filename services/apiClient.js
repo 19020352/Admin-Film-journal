@@ -2,9 +2,10 @@ import Vue from "vue";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com",
+  baseURL: "https://localhost:44358/api",
   headers: {
     "Content-Type": "application/json",
+    // 'Content-Type': 'application/x-www-form-urlencoded'
   },
 });
 
@@ -25,6 +26,7 @@ api.interceptors.response.use(
 );
 
 export default {
+  // USER
   getUsers() {
     return api.get("/api/users");
   },
@@ -40,4 +42,15 @@ export default {
   deleteUser(id) {
     return api.delete(`/api/users/${id}`);
   },
+
+  // FILM
+  getFilms(params) {
+    return api.post("/Admin/PagingFilm", params)
+  },
+  getFilmDetail(id) {
+    return api.get(`/Admin/GetFilmByID?id=${id}`)
+  },
+  updateFilm(id, film) {
+    return api.put(`/Admin/UpdateFilm?id=${id}`, film)
+  }
 };

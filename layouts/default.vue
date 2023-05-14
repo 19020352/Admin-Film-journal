@@ -61,9 +61,9 @@
       </v-menu>
     </v-app-bar>
     <v-main>
-      <v-container>
+      <div class="mx-5 my-4">
         <Nuxt />
-      </v-container>
+      </div>
     </v-main>
     <v-footer :absolute="!fixed" app> </v-footer>
     <notifications group="api" />
@@ -87,6 +87,11 @@ export default {
           icon: "mdi-chart-bubble",
           title: "User",
           to: "/user",
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Film",
+          to: "/film",
         },
       ],
       miniVariant: false,

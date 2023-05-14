@@ -67,12 +67,6 @@ export default {
     };
   },
   components: { UserSearchForm, UserTable, UserCreateEditForm },
-  mounted() {
-    this.$notify({
-      group: "auth",
-      text: "Wrong password, please try again later",
-    });
-  },
 
   async created() {
     await this.getListItem();

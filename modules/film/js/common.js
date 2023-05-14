@@ -1,0 +1,42 @@
+export const STATUS_TYPE_LIST = [
+  { value: 1, label: "Active" },
+  { value: 2, label: "Inactive" },
+];
+
+export const GERNE_TYPE_LIST = [
+  { value: "Action", label: "Action" },
+  { value: "Animation", label: "Animation" },
+  { value: "Adventure", label: "Adventure" },
+  { value: "Comedy", label: "Comedy" },
+  { value: "Crime", label: "Crime" },
+  { value: "Documentary", label: "Documentary" },
+  { value: "Drama", label: "Drama" },
+  { value: "Family", label: "Family" },
+  { value: "Fantasy", label: "Fantasy" },
+  { value: "History", label: "History" },
+  { value: "Horror", label: "Horror" },
+  { value: "Music", label: "Music" },
+  { value: "Mystery", label: "Mystery" },
+  { value: "Romance", label: "Romance" },
+  { value: "Science Fiction", label: "Science Fiction" },
+  { value: "TV Movie", label: "TV Movie" },
+  { value: "Thriller", label: "Thriller" },
+  { value: "War", label: "War" },
+  { value: "Western", label: "Western" },
+];
+export const YEAR_TYPE_LIST = [
+  { value: 1891, label: "1890s" },
+  { value: 1901, label: "1900s" },
+  { value: 1911, label: "1910s" },
+  { value: 1921, label: "1920s" },
+  { value: 1931, label: "1930s" },
+  { value: 1941, label: "1940s" },
+  { value: 1951, label: "1950s" },
+  { value: 1961, label: "1960s" },
+  { value: 1971, label: "1970s" },
+  { value: 1981, label: "1980s" },
+  { value: 1991, label: "1990s" },
+  { value: 2001, label: "2000s" },
+  { value: 2011, label: "2010s" },
+  { value: 2021, label: "2020s" },
+];
