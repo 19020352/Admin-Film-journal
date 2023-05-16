@@ -7,75 +7,52 @@
       @submit.prevent="handleSubmit"
     >
       <v-row class="">
-       
-        
-        
-
-        
-        <v-col cols="12" sm="6" md="4">
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
-            v-model="form.UserID"
-            label="User id"
+            v-model="form.AnswerID"
+            label="Answer id"
             variant="outlined"
             clearable
             dense
             outlined
+            disabled
             prepend-inner-icon="mdi-rename-box"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" sm="6" md="4">
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
-            v-model="form.UserName"
-            label="User name"
+            v-model="form.answer"
+            label="Answer"
             clearable
             dense
             outlined
             prepend-inner-icon="mdi-feather"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" sm="6" md="4">
+        
+
+        
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
-            v-model="form.FullName"
-            label="Full name"
+            v-model="form.QuestionID"
+            label="Question ID"
             clearable
             dense
             outlined
             prepend-inner-icon="mdi-feather"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-text-field
-            v-model="form.Email"
-            label="Email"
-            clearable
-            dense
-            outlined
-            prepend-inner-icon="mdi-feather"
-          ></v-text-field>
-        </v-col>
+
         <v-col cols="12" sm="6" md="4">
           <v-select
-            v-model="form.Status"
-            :items="statusTypeList"
+            v-model="form.RightAnswer"
+            :items="getRightAnswerTypeList"
             item-text="label"
             item-value="value"
             clearable
             dense
             outlined
-            label="Status"
-            prepend-inner-icon="mdi-google-nearby"
-          ></v-select>
-        </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-select
-            v-model="form.RoleType"
-            :items="roleTypeList"
-            item-text="label"
-            item-value="value"
-            clearable
-            dense
-            outlined
-            label="Role Type"
+            label="Right Answer"
             prepend-inner-icon="mdi-map"
           ></v-select>
         </v-col>
@@ -118,8 +95,7 @@
 </template>
 <script>
 import apiClient from "~/services/apiClient";
-import { STATUS_TYPE_LIST } from "./js/common";
-import { ROLE_TYPE_LIST } from "./js/common";
+import { RIGHTANSWER_TYPE_LIST } from "./js/common";
 export default {
   data() {
     return {
@@ -131,12 +107,10 @@ export default {
   },
   props: ["id"],
   computed: {
-    statusTypeList() {
-      return STATUS_TYPE_LIST;
+    getRightAnswerTypeList() {
+      return RIGHTANSWER_TYPE_LIST || [];
     },
-    roleTypeList() {
-      return ROLE_TYPE_LIST;
-    },
+    
   },
   async created() {
     this.idItem = this.id;
@@ -158,7 +132,7 @@ export default {
     async getDetail() {
       try {
         this.isLoading = true;
-        const res = await apiClient.getUserDetail(this.id);
+        const res = await apiClient.getAnswerDetail(this.id);
         console.log("get data", res);
         this.form = res.data || {};
         this.isLoading = false;

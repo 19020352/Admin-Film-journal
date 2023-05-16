@@ -27,9 +27,14 @@
             </v-btn>
           </template>
           <v-list color="#e4e9f0" dense>
-            <v-list-item link @click="handleOnEdit(item.FilmID)">
+            <v-list-item link @click="handleOnEdit(item.Related_filmID)">
               <v-list-item-content>
                 <v-list-item-title>Edit</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item link @click="handleOnDelete(item.Related_filmID)">
+              <v-list-item-content>
+                <v-list-item-title>Delete</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -45,13 +50,12 @@ export default {
     return {
       total: 500,
       listHeadData: [
-        { value: "FilmID", text: "Film ID" },
-        { value: "title", text: "Title" },
-        { value: "vote_average", text: "Vote Average" },
-        { value: "LikesCount", text: "Likes Count" },
-        { value: "ReviewsCount", text: "Reviews Count" },
-        { value: "release_date", text: "Release Date" },
-        { value: "status", text: "Status", align: "center", sortable: true },
+        { value: "Related_filmID", text: "Related_film ID", align: "center" },
+        { value: "FilmID", text: "FilmID", align: "center" },
+        { value: "DetailFilmID", text: "DetailFilmID", align: "center"},
+        { value: "original_title", text: "Original title", align: "center"},
+        { value: "title", text: "Title", align: "center"},
+        { value: "poster_path", text: "Poster path" , align: "center"},        
         { value: "Action", text: "Action", align: "center", sortable: false },
       ],
       options: {},
@@ -63,6 +67,7 @@ export default {
     options: {
       handler() {
         let tableParams = {};
+        console.log(this.options);
         tableParams.pageSize = this.options.itemsPerPage;
         tableParams.pageIndex = this.options.page;
         tableParams.sortBy = this.options.sortBy[0];
@@ -81,6 +86,9 @@ export default {
     },
     formatDate(dateStr) {
       return helpers.formatDate(dateStr);
+    },
+    handleOnDelete(id) {
+      this.$emit("on-delete", id);
     },
   },
 };

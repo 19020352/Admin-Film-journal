@@ -47,6 +47,8 @@
       @on-edit="handleOnEdit"
       :listData="listData"
       :isLoading="isLoading"
+      :total1="total1"
+      :key="tableKey"
     ></FilmTable>
   </div>
 </template>
@@ -67,6 +69,8 @@ export default {
       listData: [],
       isLoading: false,
       itemId: "",
+      total1 : 0,
+      tableKey: 0,
     };
   },
   components: { FilmSearchForm, FilmTable, FilmCreateEditForm },
@@ -80,6 +84,7 @@ export default {
         const res = await apiClient.getFilms(this.params);
         this.listData = res?.data?.listData || [];
         console.log(res);
+        this.total1 = res?.data?.total;
         this.isLoading = false;
       } catch (e) {
         this.isLoading = false;
@@ -102,7 +107,9 @@ export default {
         ...this.params,
         ...searchParams,
       };
-
+      setTimeout(() => {
+    this.tableKey++;
+  }, 500);
       // call api query search
       await this.getListItem();
     },
@@ -124,6 +131,9 @@ export default {
 
     async handleRefresh() {
       this.listData = [];
+      setTimeout(() => {
+    this.tableKey++;
+  }, 500);
       await this.getListItem();
     },
 

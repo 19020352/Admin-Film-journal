@@ -7,78 +7,91 @@
       @submit.prevent="handleSubmit"
     >
       <v-row class="">
-       
-        
-        
 
-        
-        <v-col cols="12" sm="6" md="4">
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
-            v-model="form.UserID"
-            label="User id"
+            v-model="form.Related_filmID"
+            label="Related_film ID"
             variant="outlined"
             clearable
             dense
             outlined
+            disabled
             prepend-inner-icon="mdi-rename-box"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" sm="6" md="4">
+
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
-            v-model="form.UserName"
-            label="User name"
+            v-model="form.DetailFilmID"
+            label="Detail Film ID"
             clearable
             dense
             outlined
             prepend-inner-icon="mdi-feather"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" sm="6" md="4">
+
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
-            v-model="form.FullName"
-            label="Full name"
+            v-model="form.FilmID"
+            label="Film ID"
             clearable
             dense
             outlined
             prepend-inner-icon="mdi-feather"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" sm="6" md="4">
+
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
-            v-model="form.Email"
-            label="Email"
+            v-model="form.Original_title"
+            label="Original title"
             clearable
             dense
             outlined
             prepend-inner-icon="mdi-feather"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-select
-            v-model="form.Status"
-            :items="statusTypeList"
-            item-text="label"
-            item-value="value"
+
+        <v-col cols="12">
+          <v-textarea
+            v-model="form.Overview"
+            label="Overview"
             clearable
             dense
             outlined
-            label="Status"
-            prepend-inner-icon="mdi-google-nearby"
-          ></v-select>
+            prepend-inner-icon="mdi-feather"
+          ></v-textarea>
         </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-select
-            v-model="form.RoleType"
-            :items="roleTypeList"
-            item-text="label"
-            item-value="value"
+
+
+        
+        <v-col cols="12" >
+          <v-text-field
+            v-model="form.Poster_path"
+            label="Poster path"
             clearable
             dense
             outlined
-            label="Role Type"
-            prepend-inner-icon="mdi-map"
-          ></v-select>
+            prepend-inner-icon="mdi-feather"
+          ></v-text-field>
         </v-col>
+
+        <v-col cols="12" sm="6" md="3">
+          <v-text-field
+            v-model="form.Title"
+            label="Title"
+            clearable
+            dense
+            outlined
+            prepend-inner-icon="mdi-feather"
+          ></v-text-field>
+        </v-col>
+
+
+        
+
 
 
         <v-overlay z-index="1" :value="isLoading" :absolute="true">
@@ -118,8 +131,7 @@
 </template>
 <script>
 import apiClient from "~/services/apiClient";
-import { STATUS_TYPE_LIST } from "./js/common";
-import { ROLE_TYPE_LIST } from "./js/common";
+
 export default {
   data() {
     return {
@@ -158,7 +170,7 @@ export default {
     async getDetail() {
       try {
         this.isLoading = true;
-        const res = await apiClient.getUserDetail(this.id);
+        const res = await apiClient.getRelated_filmDetail(this.id);
         console.log("get data", res);
         this.form = res.data || {};
         this.isLoading = false;

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <UserSearchForm
+    <CreditSearchForm
       @change-search-options="handleChangeSearchOptions"
-    ></UserSearchForm>
+    ></CreditSearchForm>
 
     <div class="d-flex align-center justify-end">
       <v-btn
@@ -30,33 +30,33 @@
           </v-btn>
         </template>
         <v-card>
-          <v-card-title class="text-h5"> Detail User </v-card-title>
+          <v-card-title class="text-h5"> Detail Credit </v-card-title>
           <div class="px-4 pt-4">
-            <UserCreateEditForm
+            <CreditCreateEditForm
               @cancel="handleCancel"
               @submit-form="handleSubmitForm"
               :id="itemId"
-            ></UserCreateEditForm>
+            ></CreditCreateEditForm>
           </div>
         </v-card>
       </v-dialog>
     </div>
 
-    <UserTable
+    <CreditTable
       @change-table-options="handleChangeTableOptions"
       @on-edit="handleOnEdit"
       @on-delete="handleOnDelete"
       :listData="listData"
       :isLoading="isLoading"
-      :total1 = "total1"
+      :total1="total1"
       :key="tableKey"
-    ></UserTable>
+    ></CreditTable>
   </div>
 </template>
 <script>
-import UserSearchForm from "~/modules/user/UserSearchForm.vue";
-import UserTable from "~/modules/user/UserTable.vue";
-import UserCreateEditForm from "~/modules/user/UserCreateEditForm.vue";
+import CreditSearchForm from "~/modules/credit/CreditSearchForm.vue";
+import CreditTable from "~/modules/credit/CreditTable.vue";
+import CreditCreateEditForm from "~/modules/credit/CreditCreateEditForm.vue";
 import apiClient from "~/services/apiClient";
 
 export default {
@@ -74,7 +74,7 @@ export default {
       tableKey: 0,
     };
   },
-  components: { UserSearchForm, UserTable, UserCreateEditForm },
+  components: { CreditSearchForm, CreditTable, CreditCreateEditForm },
   async created() {
     await this.getListItem();
   },
@@ -82,10 +82,11 @@ export default {
     async getListItem() {
       try {
         this.isLoading = true;
-        const res = await apiClient.getUsers(this.params);
+        const res = await apiClient.getCredits(this.params);
         this.listData = res?.data?.listData || [];
-        console.log(res);
+        console.log(res?.data);
         this.total1 = res?.data?.total;
+        
         this.isLoading = false;
       } catch (e) {
         this.isLoading = false;
@@ -118,7 +119,7 @@ export default {
     async handleSubmitForm(form) {
       console.log("handleSubmitForm", form, this.itemId);
       try {
-        const res = await apiClient.updateUser(this.itemId, form);
+        const res = await apiClient.updateCredit(this.itemId, form);
 
         if (res.status == 200) {
           this.dialog = false;
@@ -146,7 +147,7 @@ export default {
 
     async handleOnDelete(id) {
       try {
-        const res = await apiClient.deleteUser(id);
+        const res = await apiClient.deleteCredit(id);
 
         if (res.status == 200) {
           console.log("OK!");

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <UserSearchForm
+    <QuestionSearchForm
       @change-search-options="handleChangeSearchOptions"
-    ></UserSearchForm>
+    ></QuestionSearchForm>
 
     <div class="d-flex align-center justify-end">
       <v-btn
@@ -30,19 +30,19 @@
           </v-btn>
         </template>
         <v-card>
-          <v-card-title class="text-h5"> Detail User </v-card-title>
+          <v-card-title class="text-h5"> Detail Question </v-card-title>
           <div class="px-4 pt-4">
-            <UserCreateEditForm
+            <QuestionCreateEditForm
               @cancel="handleCancel"
               @submit-form="handleSubmitForm"
               :id="itemId"
-            ></UserCreateEditForm>
+            ></QuestionCreateEditForm>
           </div>
         </v-card>
       </v-dialog>
     </div>
 
-    <UserTable
+    <QuestionTable
       @change-table-options="handleChangeTableOptions"
       @on-edit="handleOnEdit"
       @on-delete="handleOnDelete"
@@ -50,13 +50,13 @@
       :isLoading="isLoading"
       :total1 = "total1"
       :key="tableKey"
-    ></UserTable>
+    ></QuestionTable>
   </div>
 </template>
 <script>
-import UserSearchForm from "~/modules/user/UserSearchForm.vue";
-import UserTable from "~/modules/user/UserTable.vue";
-import UserCreateEditForm from "~/modules/user/UserCreateEditForm.vue";
+import QuestionSearchForm from "~/modules/question/QuestionSearchForm.vue";
+import QuestionTable from "~/modules/question/QuestionTable.vue";
+import QuestionCreateEditForm from "~/modules/question/QuestionCreateEditForm.vue";
 import apiClient from "~/services/apiClient";
 
 export default {
@@ -74,7 +74,7 @@ export default {
       tableKey: 0,
     };
   },
-  components: { UserSearchForm, UserTable, UserCreateEditForm },
+  components: { QuestionSearchForm, QuestionTable, QuestionCreateEditForm },
   async created() {
     await this.getListItem();
   },
@@ -82,7 +82,7 @@ export default {
     async getListItem() {
       try {
         this.isLoading = true;
-        const res = await apiClient.getUsers(this.params);
+        const res = await apiClient.getQuestions(this.params);
         this.listData = res?.data?.listData || [];
         console.log(res);
         this.total1 = res?.data?.total;
@@ -118,7 +118,7 @@ export default {
     async handleSubmitForm(form) {
       console.log("handleSubmitForm", form, this.itemId);
       try {
-        const res = await apiClient.updateUser(this.itemId, form);
+        const res = await apiClient.updateQuestion(this.itemId, form);
 
         if (res.status == 200) {
           this.dialog = false;
@@ -146,7 +146,7 @@ export default {
 
     async handleOnDelete(id) {
       try {
-        const res = await apiClient.deleteUser(id);
+        const res = await apiClient.deleteQuestion(id);
 
         if (res.status == 200) {
           console.log("OK!");

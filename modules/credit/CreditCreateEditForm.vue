@@ -7,78 +7,111 @@
       @submit.prevent="handleSubmit"
     >
       <v-row class="">
-       
-        
-        
-
-        
-        <v-col cols="12" sm="6" md="4">
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
-            v-model="form.UserID"
-            label="User id"
+            v-model="form.Credit_id"
+            label="Credit id"
             variant="outlined"
             clearable
             dense
             outlined
+            disabled
             prepend-inner-icon="mdi-rename-box"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" sm="6" md="4">
+
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
-            v-model="form.UserName"
-            label="User name"
+            v-model="form.Type"
+            label="Type"
             clearable
             dense
             outlined
             prepend-inner-icon="mdi-feather"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" sm="6" md="4">
+
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
-            v-model="form.FullName"
-            label="Full name"
+            v-model="form.Known_for_department"
+            label="Known for department"
             clearable
             dense
             outlined
             prepend-inner-icon="mdi-feather"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" sm="6" md="4">
+
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
-            v-model="form.Email"
-            label="Email"
+            v-model="form.Name"
+            label="Name"
             clearable
             dense
             outlined
             prepend-inner-icon="mdi-feather"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-select
-            v-model="form.Status"
-            :items="statusTypeList"
-            item-text="label"
-            item-value="value"
+
+        <v-col cols="12" sm="6" md="3">
+          <v-text-field
+            v-model="form.PersonID"
+            label="Person ID"
             clearable
             dense
             outlined
-            label="Status"
-            prepend-inner-icon="mdi-google-nearby"
-          ></v-select>
+            prepend-inner-icon="mdi-feather"
+          ></v-text-field>
         </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-select
-            v-model="form.RoleType"
-            :items="roleTypeList"
-            item-text="label"
-            item-value="value"
+
+
+        
+
+        
+        <v-col cols="12" sm="6" md="3">
+          <v-text-field
+            v-model="form.FilmID"
+            label="FilmID"
             clearable
             dense
             outlined
-            label="Role Type"
-            prepend-inner-icon="mdi-map"
-          ></v-select>
+            prepend-inner-icon="mdi-feather"
+          ></v-text-field>
         </v-col>
+
+        <v-col cols="12" sm="6" md="3">
+          <v-text-field
+            v-model="form.Original_name"
+            label="Original name"
+            clearable
+            dense
+            outlined
+            prepend-inner-icon="mdi-feather"
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="12" sm="6" md="3">
+          <v-text-field
+            v-model="form.Character_"
+            label="Character"
+            clearable
+            dense
+            outlined
+            prepend-inner-icon="mdi-feather"
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="12" >
+          <v-text-field
+            v-model="form.poster_path"
+            label="Poster path"
+            clearable
+            dense
+            outlined
+            prepend-inner-icon="mdi-feather"
+          ></v-text-field>
+        </v-col>
+
 
 
         <v-overlay z-index="1" :value="isLoading" :absolute="true">
@@ -118,8 +151,7 @@
 </template>
 <script>
 import apiClient from "~/services/apiClient";
-import { STATUS_TYPE_LIST } from "./js/common";
-import { ROLE_TYPE_LIST } from "./js/common";
+
 export default {
   data() {
     return {
@@ -158,7 +190,7 @@ export default {
     async getDetail() {
       try {
         this.isLoading = true;
-        const res = await apiClient.getUserDetail(this.id);
+        const res = await apiClient.getCreditDetail(this.id);
         console.log("get data", res);
         this.form = res.data || {};
         this.isLoading = false;

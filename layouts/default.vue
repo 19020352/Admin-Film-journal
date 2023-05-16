@@ -35,7 +35,7 @@
         <template v-slot:activator="{ on }">
           <v-btn icon x-large v-on="on">
             <v-avatar size="32">
-              <img :src="user?.Avatar || 'https://picsum.photos/80'" alt="user avatar" />
+              <img :src="user.avatar" alt="user avatar" />
             </v-avatar>
           </v-btn>
         </template>
@@ -43,11 +43,11 @@
           <v-list-item-content class="justify-center">
             <div class="mx-auto text-center">
               <v-avatar size="40">
-                <img :src="user?.Avatar || 'https://picsum.photos/80'" alt="user-avatar" />
+                <img :src="user.avatar" alt="user-avatar" />
               </v-avatar>
-              <h3 class="mt-2">{{ user?.UserName || '' }}</h3>
+              <h3 class="mt-2">{{ user.userName }}</h3>
               <p class="text-caption mt-1">
-                {{ user?.Email || '' }}
+                {{ user.email }}
               </p>
               <v-divider class="my-1"></v-divider>
               <v-btn depressed rounded text> Edit Account </v-btn>
@@ -92,6 +92,36 @@ export default {
           icon: "mdi-chart-bubble",
           title: "Film",
           to: "/film",
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Question",
+          to: "/question",
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Answer",
+          to: "/answer",
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Credit",
+          to: "/credit",
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Related_film",
+          to: "/related_film",
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Similar_film",
+          to: "/similar_film",
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Journal",
+          to: "/journal",
         },
       ],
       miniVariant: false,

@@ -4,9 +4,10 @@
       :headers="listHeadData"
       :items="listData"
       :options.sync="options"
-      :server-items-length="total"
+      :server-items-length="total1"
       :footer-props="{
         showFirstLastPage: true,
+        'items-per-page-options': [10, 20, 30, 40, 50]
       }"
       :loading="isLoading"
       fixed-header
@@ -14,20 +15,25 @@
       height="500px"
       class="elevation-2"
     >
+      <template v-slot:item.release_date="{ item }">
+        {{ formatDate(item.release_date) }}
+      </template>
+         
+
+
       <template v-slot:item.Status="{ item }">
-        <v-btn v-if="item.Status === 1" rounded color="green" x-small dark>
+        <v-btn v-if="item.Status === 2" rounded color="green" x-small dark>
           Active
         </v-btn>
         <v-btn v-else rounded color="red" x-small dark> Inactive </v-btn>
       </template>
 
       <template v-slot:item.RoleType="{ item }">
-        <div class="text-primary-500" v-if="item.RoleType === 2">Admin</div>
-        <div class="text-primary-500" v-else-if="item.RoleType === 3">
-          Super Admin
-        </div>
+        <div class="text-primary-500" v-if="item.RoleType === 1">Admin</div>
+       
         <div v-else>User</div>
       </template>
+
       <template v-slot:item.Action="{ item }">
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
@@ -41,11 +47,11 @@
                 <v-list-item-title>Edit</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <!-- <v-list-item link>
+            <v-list-item link @click="handleOnDelete(item.UserID)">
               <v-list-item-content>
                 <v-list-item-title>Delete</v-list-item-title>
               </v-list-item-content>
-            </v-list-item> -->
+            </v-list-item>
           </v-list>
         </v-menu>
       </template>
@@ -53,12 +59,13 @@
   </div>
 </template>
 <script>
+import helpers from "~/services/helpers";
 export default {
   data() {
     return {
-      total: 20,
+      total: 500,
       listHeadData: [
-        { value: "UserID", text: "User ID" },
+      { value: "UserID", text: "User ID" },
         { value: "UserName", text: "User name" },
         { value: "FullName", text: "Full name" },
         { value: "Email", text: "Email" },
@@ -74,7 +81,7 @@ export default {
       options: {},
     };
   },
-  props: ["listData", "isLoading"],
+  props: ["listData", "isLoading","total1"],
 
   watch: {
     options: {
@@ -83,7 +90,9 @@ export default {
         tableParams.pageSize = this.options.itemsPerPage;
         tableParams.pageIndex = this.options.page;
         tableParams.sortBy = this.options.sortBy[0];
-        tableParams.sort = this.options.sortDesc[0];
+        if (tableParams.sortBy) {
+          tableParams.sort = this.options.sortDesc[0] ? "ASC" : "DESC";
+        }
 
         this.$emit("change-table-options", tableParams);
       },
@@ -93,6 +102,12 @@ export default {
   methods: {
     handleOnEdit(id) {
       this.$emit("on-edit", id);
+    },
+    formatDate(dateStr) {
+      return helpers.formatDate(dateStr);
+    },
+    handleOnDelete(id) {
+      this.$emit("on-delete", id);
     },
   },
 };

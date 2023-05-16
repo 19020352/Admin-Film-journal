@@ -12,58 +12,47 @@
       <div v-if="expanded">
         <v-form ref="formSearch" @submit.prevent="handleSubmit">
           <v-row class="">
+
             <v-col cols="12" sm="6" md="3">
               <v-text-field
-                v-model="form.filmName"
-                label="Film name"
+                v-model="form.Title"
+                label="Title"
                 outlined
                 clearable
                 dense
                 prepend-inner-icon="mdi-rename-box"
               ></v-text-field>
             </v-col>
-            <v-col cols="12" sm="6" md="3">
-              <v-select
-                v-model="form.genre"
-                :items="getGerneTypeList"
-                item-text="label"
-                item-value="value"
-                clearable
-                dense
-                outlined
-                label="Gerne"
-                prepend-inner-icon="mdi-google-nearby"
-              ></v-select>
-            </v-col>
-            <v-col cols="12" sm="6" md="3">
-              <v-select
-                v-model="form.year"
-                :items="getYearTypeList"
-                item-text="label"
-                item-value="value"
-                clearable
-                dense
-                outlined
-                label="Year"
-                prepend-inner-icon="mdi-google-nearby"
-              ></v-select>
-            </v-col>
-            <v-col cols="12" sm="6" md="3">
-              <v-select
-                v-model="form.Status"
-                :items="getStatusTypeList"
-                item-text="label"
-                item-value="value"
-                clearable
-                dense
-                outlined
-                label="Status"
-                prepend-inner-icon="mdi-google-nearby"
-              ></v-select>
-            </v-col>
-          </v-row>
 
-          
+            <v-col cols="12" sm="6" md="3">
+              <v-text-field
+                v-model="form.FilmID"
+                label="Film ID"
+                outlined
+                clearable
+                dense
+                prepend-inner-icon="mdi-rename-box"
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="12" sm="6" md="3">
+              <v-text-field
+                v-model="form.DetailFilmID"
+                label="Detail Film ID"
+                outlined
+                clearable
+                dense
+                prepend-inner-icon="mdi-rename-box"
+              ></v-text-field>
+            </v-col>
+
+      
+            
+            
+
+           
+            
+          </v-row>
 
           <div class="mt-2">
             <v-btn
@@ -83,31 +72,25 @@
   </div>
 </template>
 <script>
-import { GERNE_TYPE_LIST } from "./js/common";
-import { YEAR_TYPE_LIST } from "./js/common";
-import { STATUS_TYPE_LIST } from "./js/common";
+
+import { TYPE_TYPE_LIST } from "./js/common";
+import { KFD_TYPE_LIST } from "./js/common";
 export default {
   data() {
     return {
       expanded: true,
       form: {
-        filmName: null,
-        year: null,
-        genre: null,
-        Status : null,
+        related_film: null
       },
     };
   },
   computed: {
-    getGerneTypeList() {
-      return GERNE_TYPE_LIST || [];
+    getTypeTypeList() {
+      return TYPE_TYPE_LIST || [];
     },
-    getYearTypeList() {
-      return YEAR_TYPE_LIST || [];
-    },
-    getStatusTypeList() {
-      return STATUS_TYPE_LIST || [];
-    },
+    getKFDTypeList() {
+      return KFD_TYPE_LIST || [];
+    }
   },
   methods: {
     handleSubmit() {
@@ -117,9 +100,10 @@ export default {
     },
     handleClear() {
       this.form = {
-        filmName: null,
-        year: null,
-        genre: null,
+     FilmID: null,
+     DetailFilmID: null,
+     Title: null  ,
+        
       };
       this.handleSubmit();
     },

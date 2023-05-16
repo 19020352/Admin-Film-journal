@@ -1,9 +1,6 @@
 export const STATUS_TYPE_LIST = [
-  { value: "Released", label: "Released" },
-  { value: "PostProd", label: "Post Prodution" },
-  { value: "InProd", label: "In Prodution" },
-  { value: "Planned", label: "Planned" },
-  { value: "Canceled", label: "Canceled" },
+  { value: 1, label: "Active" },
+  { value: 2, label: "Inactive" },
 ];
 
 export const GERNE_TYPE_LIST = [
@@ -43,4 +40,3 @@ export const YEAR_TYPE_LIST = [
   { value: 2011, label: "2010s" },
   { value: 2021, label: "2020s" },
 ];
-

@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import apiClient from "~/services/apiClient";
+import cookie from "cookie-universal-nuxt";
 
 export default {
   layout: "login-layout",
@@ -57,24 +57,27 @@ export default {
     };
   },
   methods: {
-    async handleSubmit() {
+    handleSubmit() {
       if (this.$refs.formLogin.validate()) {
-        try {
-          const res = await apiClient.login(this.email, this.password);
-          if (res.status == 200) {
-            this.$cookies.set("token", res?.data?.Token || "", {
-              path: "/",
-              maxAge: 60 * 30,
-            });
-            this.$cookies.set("user", res?.data?.User || {}, {
-              path: "/",
-              maxAge: 60 * 30,
-            });
-            this.$router.push("/");
+        // Call api login
+
+        this.$cookies.set("token", this.email, {
+          path: "/",
+          maxAge: 60 * 30,
+        });
+        this.$cookies.set(
+          "user",
+          {
+            email: this.email,
+            avatar: "https://picsum.photos/80",
+            userName: "Cristiano",
+          },
+          {
+            path: "/",
+            maxAge: 60 * 30,
           }
-        } catch (error) {
-          console.log(error);
-        }
+        );
+        this.$router.push("/");
       } else return;
     },
     // async login() {

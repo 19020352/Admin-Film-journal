@@ -1,8 +1,8 @@
 <template>
   <div>
-    <UserSearchForm
+    <Similar_filmSearchForm
       @change-search-options="handleChangeSearchOptions"
-    ></UserSearchForm>
+    ></Similar_filmSearchForm>
 
     <div class="d-flex align-center justify-end">
       <v-btn
@@ -30,33 +30,34 @@
           </v-btn>
         </template>
         <v-card>
-          <v-card-title class="text-h5"> Detail User </v-card-title>
+          <v-card-title class="text-h5"> Detail Similar_film </v-card-title>
           <div class="px-4 pt-4">
-            <UserCreateEditForm
+            <Similar_filmCreateEditForm
               @cancel="handleCancel"
               @submit-form="handleSubmitForm"
               :id="itemId"
-            ></UserCreateEditForm>
+            ></Similar_filmCreateEditForm>
           </div>
         </v-card>
       </v-dialog>
     </div>
 
-    <UserTable
+    <Similar_filmTable
+      
       @change-table-options="handleChangeTableOptions"
       @on-edit="handleOnEdit"
       @on-delete="handleOnDelete"
       :listData="listData"
       :isLoading="isLoading"
-      :total1 = "total1"
+      :total1="total1"
       :key="tableKey"
-    ></UserTable>
+    ></Similar_filmTable>
   </div>
 </template>
 <script>
-import UserSearchForm from "~/modules/user/UserSearchForm.vue";
-import UserTable from "~/modules/user/UserTable.vue";
-import UserCreateEditForm from "~/modules/user/UserCreateEditForm.vue";
+import Similar_filmSearchForm from "~/modules/similar_film/Similar_filmSearchForm.vue";
+import Similar_filmTable from "~/modules/similar_film/Similar_filmTable.vue";
+import Similar_filmCreateEditForm from "~/modules/similar_film/Similar_filmCreateEditForm.vue";
 import apiClient from "~/services/apiClient";
 
 export default {
@@ -74,7 +75,7 @@ export default {
       tableKey: 0,
     };
   },
-  components: { UserSearchForm, UserTable, UserCreateEditForm },
+  components: { Similar_filmSearchForm, Similar_filmTable, Similar_filmCreateEditForm },
   async created() {
     await this.getListItem();
   },
@@ -82,9 +83,9 @@ export default {
     async getListItem() {
       try {
         this.isLoading = true;
-        const res = await apiClient.getUsers(this.params);
+        const res = await apiClient.getSimilar_films(this.params);
         this.listData = res?.data?.listData || [];
-        console.log(res);
+        console.log(res?.data);
         this.total1 = res?.data?.total;
         this.isLoading = false;
       } catch (e) {
@@ -98,7 +99,7 @@ export default {
         ...this.params,
         ...options,
       };
-
+ 
       // call api query search
       await this.getListItem();
     },
@@ -118,7 +119,7 @@ export default {
     async handleSubmitForm(form) {
       console.log("handleSubmitForm", form, this.itemId);
       try {
-        const res = await apiClient.updateUser(this.itemId, form);
+        const res = await apiClient.updateSimilar_film(this.itemId, form);
 
         if (res.status == 200) {
           this.dialog = false;
@@ -146,7 +147,7 @@ export default {
 
     async handleOnDelete(id) {
       try {
-        const res = await apiClient.deleteUser(id);
+        const res = await apiClient.deleteSimilar_film(id);
 
         if (res.status == 200) {
           console.log("OK!");

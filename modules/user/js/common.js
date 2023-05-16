@@ -1,10 +1,9 @@
 export const STATUS_TYPE_LIST = [
-  { value: 1, label: "Active" },
-  { value: 2, label: "Inactive" },
+  { value: 2, label: "Active" },
+  { value: 1, label: "Inactive" },
 ];
 
 export const ROLE_TYPE_LIST = [
-    {value: 1, label: 'User'},
-    {value: 2, label: 'Admin'},
-    {value: 2, label: 'Super Admin'},
-  ]
+  { value: 0, label: "User" },
+  { value: 1, label: "Admin" },
+];

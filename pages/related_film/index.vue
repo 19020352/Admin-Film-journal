@@ -1,8 +1,8 @@
 <template>
   <div>
-    <UserSearchForm
+    <Related_filmSearchForm
       @change-search-options="handleChangeSearchOptions"
-    ></UserSearchForm>
+    ></Related_filmSearchForm>
 
     <div class="d-flex align-center justify-end">
       <v-btn
@@ -30,33 +30,33 @@
           </v-btn>
         </template>
         <v-card>
-          <v-card-title class="text-h5"> Detail User </v-card-title>
+          <v-card-title class="text-h5"> Detail Related_film </v-card-title>
           <div class="px-4 pt-4">
-            <UserCreateEditForm
+            <Related_filmCreateEditForm
               @cancel="handleCancel"
               @submit-form="handleSubmitForm"
               :id="itemId"
-            ></UserCreateEditForm>
+            ></Related_filmCreateEditForm>
           </div>
         </v-card>
       </v-dialog>
     </div>
 
-    <UserTable
+    <Related_filmTable
       @change-table-options="handleChangeTableOptions"
       @on-edit="handleOnEdit"
       @on-delete="handleOnDelete"
       :listData="listData"
       :isLoading="isLoading"
-      :total1 = "total1"
+      :total1="total1"
       :key="tableKey"
-    ></UserTable>
+    ></Related_filmTable>
   </div>
 </template>
 <script>
-import UserSearchForm from "~/modules/user/UserSearchForm.vue";
-import UserTable from "~/modules/user/UserTable.vue";
-import UserCreateEditForm from "~/modules/user/UserCreateEditForm.vue";
+import Related_filmSearchForm from "~/modules/related_film/Related_filmSearchForm.vue";
+import Related_filmTable from "~/modules/related_film/Related_filmTable.vue";
+import Related_filmCreateEditForm from "~/modules/related_film/Related_filmCreateEditForm.vue";
 import apiClient from "~/services/apiClient";
 
 export default {
@@ -72,9 +72,10 @@ export default {
       itemId: "",
       total1 : 0,
       tableKey: 0,
+      
     };
   },
-  components: { UserSearchForm, UserTable, UserCreateEditForm },
+  components: { Related_filmSearchForm, Related_filmTable, Related_filmCreateEditForm },
   async created() {
     await this.getListItem();
   },
@@ -82,10 +83,11 @@ export default {
     async getListItem() {
       try {
         this.isLoading = true;
-        const res = await apiClient.getUsers(this.params);
+        const res = await apiClient.getRelated_films(this.params);
         this.listData = res?.data?.listData || [];
-        console.log(res);
+        console.log(res?.data);
         this.total1 = res?.data?.total;
+        
         this.isLoading = false;
       } catch (e) {
         this.isLoading = false;
@@ -118,7 +120,7 @@ export default {
     async handleSubmitForm(form) {
       console.log("handleSubmitForm", form, this.itemId);
       try {
-        const res = await apiClient.updateUser(this.itemId, form);
+        const res = await apiClient.updateRelated_film(this.itemId, form);
 
         if (res.status == 200) {
           this.dialog = false;
@@ -146,7 +148,7 @@ export default {
 
     async handleOnDelete(id) {
       try {
-        const res = await apiClient.deleteUser(id);
+        const res = await apiClient.deleteRelated_film(id);
 
         if (res.status == 200) {
           console.log("OK!");

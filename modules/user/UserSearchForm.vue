@@ -37,7 +37,9 @@
             <v-col cols="12" sm="6" md="4">
               <v-select
                 v-model="form.status"
-                :items="['Active', 'Inactive']"
+                :items="getStatusTypeList"
+                item-text="label"
+                item-value="value"
                 outlined
                 clearable
                 dense
@@ -48,7 +50,9 @@
             <v-col cols="12" sm="6" md="4">
               <v-select
                 v-model="form.roleType"
-                :items="['User', 'Admin', 'Super Admin']"
+                :items="getRoleTypeList"
+                item-text="label"
+                item-value="value"
                 outlined
                 clearable
                 dense
@@ -56,10 +60,16 @@
                 prepend-inner-icon="mdi-map"
               ></v-select>
             </v-col>
+            
+            
           </v-row>
 
           <div class="mt-2">
-            <v-btn type="reset" class="mr-2 text-0" color="error" outlined
+            <v-btn
+              @click="handleClear"
+              class="mr-2 text-0"
+              color="error"
+              outlined
               >Clear</v-btn
             >
             <v-btn @click="handleSubmit" class="text-0" color="primary">
@@ -72,31 +82,41 @@
   </div>
 </template>
 <script>
+
+
+import { STATUS_TYPE_LIST } from "./js/common";
+import { ROLE_TYPE_LIST } from "./js/common";
 export default {
   data() {
     return {
       expanded: true,
       form: {
-        fullName: "",
-        userName: "",
-        status: "",
-        roleType: "",
-      },
-      validations: {
-        firstName: [
-          (value) => {
-            if (value) return true;
-            return "You must enter a first name.";
-          },
-        ],
+        user: null
       },
     };
+  },
+  computed: {
+    getStatusTypeList() {
+      return STATUS_TYPE_LIST || [];
+    },
+    getRoleTypeList() {
+      return ROLE_TYPE_LIST || [];
+    },
   },
   methods: {
     handleSubmit() {
       if (this.$refs.formSearch.validate()) {
-        this.$emit('change-search-options', this.form)
+        this.$emit("change-search-options", this.form);
       } else return;
+    },
+    handleClear() {
+      this.form = {
+        userName: null,
+        fullName : null,
+        status : null,
+        roleType : null,
+      };
+      this.handleSubmit();
     },
   },
 };
