@@ -84,7 +84,7 @@ export default {
         this.isLoading = true;
         const res = await apiClient.getCredits(this.params);
         this.listData = res?.data?.listData || [];
-        console.log(res?.data);
+        //console.log(res?.data);
         this.total1 = res?.data?.total;
         
         this.isLoading = false;

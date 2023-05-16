@@ -125,7 +125,7 @@ export default {
         },
       ],
       miniVariant: false,
-      title: "CMS Admin Film Rating",
+      title: "CMS Admin Film Journal",
       user: "",
     };
   },
@@ -137,6 +137,7 @@ export default {
       this.$cookies.remove("user");
       this.$cookies.remove("token");
       this.$router.push("/login");
+      localStorage.removeItem("Token");
     },
   },
 };

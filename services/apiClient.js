@@ -1,12 +1,18 @@
 import Vue from "vue";
 import axios from "axios";
 
+
+
 const api = axios.create({
   baseURL: "https://localhost:44358/api",
   headers: {
     "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*", 
+    "Authorization" : localStorage.getItem("Token"),
     // 'Content-Type': 'application/x-www-form-urlencoded'
   },
+  prependPath: true,
+          changeOrigin: true,
 });
 
 // Thêm interceptor `onError` vào axios instance
@@ -21,13 +27,26 @@ api.interceptors.response.use(
         duration: 5000
       });
     }
+    if (error.response && error.response.status === 500) {
+      Vue.notify({
+        group: "api",
+        title: "Get API Error",
+        text: "Không lấy được dữ liệu",
+        duration: 5000
+      });
+    }
     return Promise.reject(error);
   }
 );
 
 export default {
+  logIn(email,password){
+    return api.get(`/Users/login?email=${email}&password=${password}`)
+  }
+  ,
   // USER
   getUsers(params) {
+    console.log(localStorage.getItem("Token"));
     return api.post("/Admin/PagingUser", params)
   },
   getUserDetail(id) {

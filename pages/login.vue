@@ -28,14 +28,16 @@
 
 <script>
 import cookie from "cookie-universal-nuxt";
-
+import apiClient from "~/services/apiClient";
+import Vue from "vue";
+import VueSimpleAlert from "vue-simple-alert";
 export default {
   layout: "login-layout",
   data() {
     return {
-      email: "example@gmail.com",
-      password: "xuanducr7",
-
+      email: "masterilkd@gmail.com",
+      password: "19020352",
+      
       validations: {
         email: [
           (value) => {
@@ -57,10 +59,31 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
+    
+    async handleSubmit() {
       if (this.$refs.formLogin.validate()) {
         // Call api login
-
+        Vue.use(VueSimpleAlert);
+        //console.log(res.data.User.RoleType);
+        
+        
+        try {
+          const res = await apiClient.logIn(this.email,this.password);
+          if(res.data.User.RoleType == 0){
+          this.$alert("You aren't an Admin. You don't have permission to enter.");
+          return;
+        };
+        //console.log(res.data.User.Avatar);
+        
+      } catch (e) {
+        this.$alert("Incorrect Username or Password.");
+        //this.validations.email = "Sai";
+        return;
+      } 
+        
+      const res = await apiClient.logIn(this.email,this.password);
+      
+        localStorage.setItem("Token", res.data.Token);
         this.$cookies.set("token", this.email, {
           path: "/",
           maxAge: 60 * 30,
@@ -69,8 +92,8 @@ export default {
           "user",
           {
             email: this.email,
-            avatar: "https://picsum.photos/80",
-            userName: "Cristiano",
+            avatar: res.data.User.Avatar,
+            userName: res.data.User.UserName,
           },
           {
             path: "/",
@@ -80,6 +103,7 @@ export default {
         this.$router.push("/");
       } else return;
     },
+    
     // async login() {
     //   try {
     //     await this.$auth.loginWith("local", {

@@ -83,7 +83,7 @@ export default {
         this.isLoading = true;
         const res = await apiClient.getFilms(this.params);
         this.listData = res?.data?.listData || [];
-        console.log(res);
+        //console.log(res);
         this.total1 = res?.data?.total;
         this.isLoading = false;
       } catch (e) {

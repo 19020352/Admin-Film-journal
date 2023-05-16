@@ -79,6 +79,26 @@
             prepend-inner-icon="mdi-map"
           ></v-select>
         </v-col>
+        <v-col cols="12">
+          <v-textarea
+            v-model="form.Avatar"
+            label="Avatar"
+            clearable
+            dense
+            outlined
+            prepend-inner-icon="mdi-feather"
+          ></v-textarea>
+        </v-col>
+        <v-col cols="12">
+          <v-textarea
+            v-model="form.Banner"
+            label="Banner"
+            clearable
+            dense
+            outlined
+            prepend-inner-icon="mdi-feather"
+          ></v-textarea>
+        </v-col>
 
 
         <v-overlay z-index="1" :value="isLoading" :absolute="true">

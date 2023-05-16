@@ -81,6 +81,7 @@ export default {
   methods: {
     async getListItem() {
       try {
+        //console.log(this.$cookies.get("token"));
         this.isLoading = true;
         const res = await apiClient.getUsers(this.params);
         this.listData = res?.data?.listData || [];
