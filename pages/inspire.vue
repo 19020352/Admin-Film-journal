@@ -22,4 +22,5 @@
 export default {
   name: 'InspirePage'
 }
+this.$nuxt.refresh()
 </script>
