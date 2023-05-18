@@ -41,7 +41,11 @@ api.interceptors.response.use(
 
 export default {
   logIn(email,password){
-    return api.get(`/Users/login?email=${email}&password=${password}`)
+    var params ={
+      email : email,
+      password : password
+    }
+    return api.post("/Users/login",params)
   }
   ,
   // USER
