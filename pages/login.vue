@@ -82,7 +82,7 @@ export default {
       } 
         
       const res = await apiClient.logIn(this.email,this.password);
-      
+        localStorage.removeItem("Refresh");
         localStorage.setItem("Token", res.data.Token);
         this.$cookies.set("token", this.email, {
           path: "/",
