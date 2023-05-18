@@ -15,6 +15,7 @@ const api = axios.create({
           changeOrigin: true,
 });
 
+
 // Thêm interceptor `onError` vào axios instance
 api.interceptors.response.use(
   (response) => response,
@@ -50,14 +51,18 @@ export default {
   ,
   // USER
   getUsers(params) {
-    console.log(localStorage.getItem("Token"));
+    if (localStorage.getItem("Refresh") === null) {
+      localStorage.setItem("Refresh","1")
+      location.reload();
+    }
+    
     return api.post("/Admin/PagingUser", params)
   },
   getUserDetail(id) {
     return api.get(`/Admin/GetUserByID?id=${id}`)
   },
   updateUser(id, user) {
-    console.log(!user.hasOwnProperty("UserID"));
+    
     
     return api.put(`/Admin/UpdateUser?id=${id}`, user)
   },
@@ -67,6 +72,10 @@ export default {
 
   // FILM
   getFilms(params) {
+    if (localStorage.getItem("Refresh") === null) {
+      localStorage.setItem("Refresh","1")
+      location.reload();
+    }
     return api.post("/Admin/PagingFilm", params)
   },
   getFilmDetail(id) {
@@ -79,6 +88,10 @@ export default {
     return api.put(`/Admin/UpdateFilm?id=${id}`, film)
   },
   getQuestions(params) {
+    if (localStorage.getItem("Refresh") === null) {
+      localStorage.setItem("Refresh","1")
+      location.reload();
+    }
     return api.post("/Admin/PagingQuestion", params)
   },
   getQuestionDetail(id) {
@@ -95,6 +108,10 @@ export default {
     return api.delete(`/Admin/DeleteQuestion?id=${id}`)
   },
   getAnswers(params) {
+    if (localStorage.getItem("Refresh") === null) {
+      localStorage.setItem("Refresh","1")
+      location.reload();
+    }
     return api.post("/Admin/PagingAnswer", params)
   },
   getAnswerDetail(id) {
@@ -111,6 +128,10 @@ export default {
     return api.delete(`/Admin/DeleteAnswer?id=${id}`)
   },
   getCredits(params) {
+    if (localStorage.getItem("Refresh") === null) {
+      localStorage.setItem("Refresh","1")
+      location.reload();
+    }
     return api.post("/Admin/PagingCredit", params)
   },
   getCreditDetail(id) {
@@ -127,6 +148,10 @@ export default {
     return api.delete(`/Admin/DeleteCredit?id=${id}`)
   },
   getRelated_films(params) {
+    if (localStorage.getItem("Refresh") === null) {
+      localStorage.setItem("Refresh","1")
+      location.reload();
+    }
     return api.post("/Admin/PagingRelated_film", params)
   },
   getRelated_filmDetail(id) {
@@ -143,6 +168,10 @@ export default {
     return api.delete(`/Admin/DeleteRelated_film?id=${id}`)
   },
   getSimilar_films(params) {
+    if (localStorage.getItem("Refresh") === null) {
+      localStorage.setItem("Refresh","1")
+      location.reload();
+    }
     return api.post("/Admin/PagingSimilar_film", params)
   },
   getSimilar_filmDetail(id) {
@@ -159,6 +188,10 @@ export default {
     return api.delete(`/Admin/DeleteSimilar_film?id=${id}`)
   },
   getJournals(params) {
+    if (localStorage.getItem("Refresh") === null) {
+      localStorage.setItem("Refresh","1")
+      location.reload();
+    }
     return api.post("/Admin/PagingJournal", params)
   },
   getJournalDetail(id) {
