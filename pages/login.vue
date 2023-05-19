@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       email: "masterilkd@gmail.com",
-      password: "19020352",
+      password: "",
       
       validations: {
         email: [
