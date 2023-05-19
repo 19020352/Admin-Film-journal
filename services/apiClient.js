@@ -21,6 +21,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 404) {
+      
       Vue.notify({
         group: "api",
         title: "Get API Error",
@@ -29,10 +30,53 @@ api.interceptors.response.use(
       });
     }
     if (error.response && error.response.status === 500) {
+      console.log(error.response.config.url);
+      var title = "";
+      var text = ""
+      if(error.response.config.url == '/Admin/AddAnswer' || error.response.config.url == '/Admin/UpdateAnswer'){
+            title = "Input Error";
+            text = "The QuestionID must match a Question in the Database."
+      
+      };
+
+      if(error.response.config.url == '/Admin/AddCredit' || error.response.config.url == '/Admin/UpdateCredit'){
+        title = "Input Error";
+        text = "The PersonID must not be NULL <br> The FilmID must match a Film in the Database."
+  };
+
+  if(error.response.config.url == '/Admin/AddFilm' || error.response.config.url == '/Admin/UpdateFilm'){
+    title = "Input Error";
+    text = "The PersonID must not be NULL <br> The FilmID must match a Film in the Database."
+};
+
+
+if(error.response.config.url == '/Admin/AddQuestion' || error.response.config.url == '/Admin/UpdateQuestion'){
+  title = "Input Error";
+  text = "The Question can not be NULL <br> The FilmID must match a Film in the Database."
+};
+
+if( error.response.config.url == '/Admin/UpdateUser'){
+  title = "Input Error";
+  text = "Username and Email can not be NULL."
+};
+
+if(error.response.config.url == '/Admin/AddJournal' || error.response.config.url == '/Admin/UpdateJournal'){
+  title = "Input Error";
+  text = "Category can not be NULL."
+};
+
+if(error.response.config.url == '/Admin/AddRelated_film' || error.response.config.url == '/Admin/UpdateRelated_film'){
+  title = "Input Error";
+  text = "DetailFilmID and FilmID cannot be null "
+};
+if(error.response.config.url == '/Admin/AddSimilar_film' || error.response.config.url == '/Admin/UpdateSimilar_film'){
+  title = "Input Error";
+  text = "DetailFilmID and FilmID cannot be null "
+};
       Vue.notify({
         group: "api",
-        title: "Get API Error",
-        text: "Không lấy được dữ liệu",
+        title: title,
+        text: text,
         duration: 5000
       });
     }
@@ -86,6 +130,9 @@ export default {
       return api.post(`/Admin/AddFilm`, film)
     };
     return api.put(`/Admin/UpdateFilm?id=${id}`, film)
+  },
+  deleteFilm(id) {
+    return api.delete(`/Admin/DeleteFilm?id=${id}`)
   },
   getQuestions(params) {
     if (localStorage.getItem("Refresh") === null) {

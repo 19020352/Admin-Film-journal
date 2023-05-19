@@ -32,6 +32,11 @@
                 <v-list-item-title>Edit</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
+            <v-list-item link @click="handleOnDelete(item.FilmID)">
+              <v-list-item-content>
+                <v-list-item-title>Delete</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
           </v-list>
         </v-menu>
       </template>
@@ -81,6 +86,9 @@ export default {
     },
     formatDate(dateStr) {
       return helpers.formatDate(dateStr);
+    },
+    handleOnDelete(id) {
+      this.$emit("on-delete", id);
     },
   },
 };

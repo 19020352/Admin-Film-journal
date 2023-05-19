@@ -20,6 +20,7 @@
             clearable
             dense
             outlined
+            disabled
             prepend-inner-icon="mdi-rename-box"
           ></v-text-field>
         </v-col>
