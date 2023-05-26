@@ -50,7 +50,7 @@
                 {{ user.email }}
               </p>
               <v-divider class="my-1"></v-divider>
-              <v-btn depressed rounded text> Edit Account </v-btn>
+              <!-- <v-btn depressed rounded text> Edit Account </v-btn> -->
               <v-divider class="my-1"></v-divider>
               <v-btn depressed rounded text @click="handleLogout">
                 Logout
