@@ -46,7 +46,7 @@ export default {
                 /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
               return pattern.test(value) || "Invalid e-mail.";
             }
-            return "You must enter a first name.";
+            return "You must enter an E-mail.";
           },
         ],
         password: [
@@ -76,7 +76,7 @@ export default {
         //console.log(res.data.User.Avatar);
         
       } catch (e) {
-        this.$alert("Incorrect Username or Password.");
+        this.$alert("Incorrect E-mail or Password.");
         //this.validations.email = "Sai";
         return;
       } 
