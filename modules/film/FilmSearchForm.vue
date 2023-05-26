@@ -120,6 +120,7 @@ export default {
         filmName: null,
         year: null,
         genre: null,
+        Status : null,
       };
       this.handleSubmit();
     },
