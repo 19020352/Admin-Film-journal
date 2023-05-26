@@ -45,6 +45,7 @@
     <FilmTable
       @change-table-options="handleChangeTableOptions"
       @on-edit="handleOnEdit"
+      @on-delete="handleOnDelete"
       :listData="listData"
       :isLoading="isLoading"
       :total1="total1"
@@ -141,6 +142,19 @@ export default {
       this.itemId = id;
       this.dialog = true;
       console.log("this.itemId", this.itemId);
+    },
+    async handleOnDelete(id) {
+      try {
+        const res = await apiClient.deleteFilm(id);
+
+        if (res.status == 200) {
+          console.log("OK!");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      this.listData = [];
+      await this.getListItem();
     },
 
     handleCancel() {
