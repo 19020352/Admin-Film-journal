@@ -35,7 +35,7 @@ export default {
   layout: "login-layout",
   data() {
     return {
-      email: "masterilkd@gmail.com",
+      email: "",
       password: "",
       
       validations: {
